@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from db import Base
 
@@ -7,7 +7,8 @@ class Category(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, nullable=False)
-    description = Column(String)
+    description = Column(Text, nullable=True)  # ✅ обязательное поле
+    price = Column(Float, nullable=True)       # ✅ обязательное поле
 
     books = relationship("Book", back_populates="category")
 
@@ -16,8 +17,9 @@ class Book(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
-    author = Column(String, nullable=False)
-    year = Column(Integer)
+    description = Column(Text, nullable=True)  # ✅ обязательное поле
+    price = Column(Float, nullable=False)      # ✅ обязательное поле
+    url = Column(String, nullable=True)        # ✅ обязательное поле
     category_id = Column(Integer, ForeignKey("categories.id"))
 
     category = relationship("Category", back_populates="books")
