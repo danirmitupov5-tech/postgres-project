@@ -27,4 +27,4 @@ def get_books(db: Session):
     return db.query(Book).all()
 
 def get_books_by_category(db: Session, category_name: str):
-    return db.query(Book).join(Category).filter(Category.name == category_name).all()
+    return db.query(Book).join(Category).filter(Category.name == category_name).all()Ё
